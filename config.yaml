@@ -25,3 +25,18 @@ HEAD:
       default-nameserver:
         - 1.1.1.1
 TEST_URL: http://cp.cloudflare.com/generate_204
+CUSTOM_PROXY_GROUP:
+- name: 🚀 Manual 1
+  type: select
+  manual: true
+  rule: false
+- name: 🚀 Manual 2
+  type: select
+  manual: true
+  rule: false
+- name: 🔯 Fallback
+  type: fallback
+  rule: false
+- name: 🔮 Load Balancing
+  type: load-balance
+  rule: false
