@@ -174,7 +174,7 @@ async def ConvertsV2Ray(buf):
             trojan["password"] = urlTrojan.password
             trojan["udp"] = True
             trojan["skip-cert-verify"] = bool(
-                distutils.util.strtobool(query.get("allowInsecure")))
+                distutils.util.strtobool(query.get("allowInsecure", "true")))
 
             sni = get(query.get("sni"))
             if sni != "":
@@ -205,12 +205,7 @@ async def ConvertsV2Ray(buf):
                 grpcOpts["serviceName"] = query.get("serviceName")
                 trojan["grpc-opts"] = grpcOpts
 
-            fingerprint = get(query.get("fp"))
-            if fingerprint == "":
-                trojan["client-fingerprint"] = "chrome"
-            else:
-                trojan["client-fingerprint"] = fingerprint
-
+            trojan["client-fingerprint"] = get(query.get("fp", "chrome"))
             proxies.append(trojan)
 
         elif scheme == "vless":
